@@ -6,7 +6,12 @@
 <% end %>
 
 <div class="page_counter">
-  <%= will_paginate @posts %>
+  <% if params[:search] %>
+    <% @posts = Post.search(params[:search]).order("created_at DESC") %>
+  <% else %>
+    <%= will_paginate @posts %>
+  <% end %>
+
 </div>
 
 <div class="posts_list">
