@@ -3,6 +3,28 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
   root "home#index"
   get "/about" => "home#about"
+
+  resources :posts
+  # get "/posts/new" => "posts#new", as: :new_post
+  # post "/posts" => "posts#create", as: :posts
+  # get "/posts" => "posts#index"
+  # get "/posts/:id" => "posts#show", as: :post
+  # get "/posts/:id/edit" => "posts#edit", as: :edit_post
+  # patch "/posts/:id/" => "posts#update"
+  # delete "/posts/:id" => "posts#destroy"
+  get "/posts/search" => "posts#search"
+  post "/posts/search" => "posts#search", as: :search
+
+  resources :comments
+  # get "/comments/new" => "comments#new", as: :new_comment
+  # post "/comments" => "comments#create", as: :comments
+  # get "/comments" => "comments#index"
+  # get "/comments/:id" => "comments#show", as: :comment
+  # get "/comments/:id/edit" => "comments#edit", as: :edit_comment
+  # patch "/comments/:id/" => "comments#update"
+  # delete "/comments/:id" => "comments#destroy"
+
+  # delete "/posts/:id" => "posts#destroy"
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
 

@@ -1,0 +1,17 @@
+<h1>All Posts</h1>
+
+<%= form_tag(posts_path, :method => "get", id: "search-form") do %>
+  <%= text_field_tag :search, params[:search], placeholder: "Search Posts" %>
+  <%= submit_tag "Search" %>
+<% end %>
+
+<div class="page_counter">
+  <%= will_paginate @posts %>
+</div>
+
+<div class="posts_list">
+  <% @posts.each do |post| %>
+    <%= link_to post.title, post_path(post) %>
+    <hr />
+  <% end %>
+</div>
