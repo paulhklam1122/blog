@@ -6,7 +6,11 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-200.times do
-  Post.create title: Faker::Commerce.product_name,
-                body: Faker::Hacker.say_something_smart + Faker::Hipster.sentence(3)
+# 200.times do
+#   Post.create title: Faker::Commerce.product_name,
+#                 body: Faker::Hacker.say_something_smart + Faker::Hipster.sentence(3)
+# end
+
+["Electronics", "Lifestyle", "Cuisine"].each do |cat|
+  Category.create title: cat
 end

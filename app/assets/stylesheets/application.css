@@ -70,3 +70,15 @@ body {
 .posts_list {
   margin-top: 30px;
 }
+
+.flash-notice {
+  width: 100%;
+  height: 40px;
+  background-color: green;
+}
+
+.flash-alert {
+  width: 100%;
+  height: 40px;
+  background-color: red;
+}

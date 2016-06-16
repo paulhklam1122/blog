@@ -1,4 +1,5 @@
 class Post < ActiveRecord::Base
+  has_many :comments, dependent: :destroy
   validates :title, presence: {message: "must be present!"}, uniqueness: true, length: {minimum: 7}
   validates :body, presence: true
 
@@ -18,4 +19,9 @@ class Post < ActiveRecord::Base
   def total_pages
 
   end
+
+  def new_first_comments
+     comments.order(created_at: :desc)
+  end
+
 end
