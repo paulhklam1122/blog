@@ -1,5 +1,6 @@
 class CommentsController < ApplicationController
   before_action :find_comment, only: [:show, :edit, :update, :destroy]
+  before_action :find_post, only: [:create, :edit, :update]
   before_action :authenticate_user!, except: [:show, :index]
 
   def new
@@ -8,7 +9,6 @@ class CommentsController < ApplicationController
 
   def create
     @comment = Comment.new comment_params
-    @post = Post.find params[:post_id]
     @comment.user = current_user
     @comment.post = @post
     if @comment.save
@@ -26,12 +26,9 @@ class CommentsController < ApplicationController
   end
 
   def edit
-    @post = Post.find params[:post_id]
   end
 
   def update
-    @post = Post.find params[:post_id]
-    comment_params = params.require(:comment).permit(:body)
     if @comment.update comment_params
       redirect_to post_path(@post)
     else
@@ -49,6 +46,10 @@ class CommentsController < ApplicationController
 
   def find_comment
     @comment = Comment.find params[:id]
+  end
+
+  def find_post
+    @post = Post.find params[:post_id]
   end
 
   def comment_params
