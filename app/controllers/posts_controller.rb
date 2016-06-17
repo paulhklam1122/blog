@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
   before_action :find_post, only:[:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, except: [:show, :index]
   def new
     @post = Post.new
   end
@@ -7,6 +8,7 @@ class PostsController < ApplicationController
     # post_params = params.require(:post).permit(:title, :body)
     post_params
     @post = Post.new post_params
+    @post.user = current_user
     if @post.save
       redirect_to posts_path(@post), notice: "Post created"
     else
@@ -59,5 +61,9 @@ class PostsController < ApplicationController
 
   def find_post
     @post = Post.find params[:id]
+  end
+
+  def authenticate_user!
+    redirect_to new_sessions_path, alert: "please sign in" unless user_signed_in?
   end
 end

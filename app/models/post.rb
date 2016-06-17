@@ -1,5 +1,6 @@
 class Post < ActiveRecord::Base
   has_many :comments, dependent: :destroy
+  belongs_to :user
   validates :title, presence: {message: "must be present!"}, uniqueness: true, length: {minimum: 7}
   validates :body, presence: true
 

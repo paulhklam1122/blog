@@ -13,9 +13,19 @@
       <%= link_to "About", about_path %> |
       <%= link_to "New Post", new_post_path %> |
       <%= link_to "All Posts", posts_path %> |
-      <%#= link_to "New Comment", new_comment_path %> 
-      <%#= link_to "All Comments", comments_path %>
+      <% if user_signed_in? %>
+        Signed in as: <%= link_to "#{current_user.full_name}", edit_user_path(session[:user_id])%> |
+        <%= link_to "Sign Out", sessions_path, method: :delete %>
+      <% else %>
+        <%= link_to "Sign Up", new_user_path %> |
+        <%= link_to "Sign In", new_sessions_path %>
+      <% end %>
     </nav>
+  <% if flash[:notice] %>
+    <div class="flash-notice"><%= flash[:notice] %></div>
+  <% elsif flash[:alert] %>
+    <div class="flash-alert"><%= flash[:alert] %></div>
+  <% end %>
     <div class="content">
       <%= yield %>
     </div>
