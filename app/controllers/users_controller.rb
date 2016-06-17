@@ -35,11 +35,16 @@ class UsersController < ApplicationController
 
   def update_password
     @user = User.find session[:user_id]
-    if @user.authenticate(params[:password]) && params[:new_password] == params[:new_password_confirmation]
-      @user.update password: params[:new_password]
-      redirect_to root_path, notice: "Password Changed"
+    if @user.authenticate(params[:password])
+      if params[:new_password] == params[:new_password_confirmation]
+        @user.update password: params[:new_password]
+        redirect_to root_path, notice: "Password Successfully Changed!"
+      else
+        flash[:alert] = "Your new password and confirmation do not match."
+        render :change_password
+      end
     else
-      flash[:alert] = "The password you entered doesn't match the one in our records"
+      flash[:alert] = "The password you entered doesn't match the one in our records."
       render :change_password
     end
   end
