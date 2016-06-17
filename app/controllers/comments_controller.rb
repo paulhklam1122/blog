@@ -5,8 +5,8 @@ class CommentsController < ApplicationController
   def new
     @comment = Comment.new
   end
+
   def create
-    comment_params
     @comment = Comment.new comment_params
     @post = Post.find params[:post_id]
     @comment.user = current_user
@@ -19,7 +19,6 @@ class CommentsController < ApplicationController
   end
 
   def show
-    # @comment = Comment.find params[:id]
   end
 
   def index
@@ -27,13 +26,11 @@ class CommentsController < ApplicationController
   end
 
   def edit
-    # @comment = Comment.find params[:id]
     @post = Post.find params[:post_id]
   end
 
   def update
     @post = Post.find params[:post_id]
-    # @comment = Comment.find params[:id]
     comment_params = params.require(:comment).permit(:body)
     if @comment.update comment_params
       redirect_to post_path(@post)
@@ -44,7 +41,6 @@ class CommentsController < ApplicationController
 
   def destroy
     post = Post.find params[:post_id]
-    # comment = Comment.find params[:id]
     comment.destroy
     redirect_to post_path(post), notice: "Comment deleted!"
   end
