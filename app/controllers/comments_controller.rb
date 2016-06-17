@@ -1,6 +1,7 @@
 class CommentsController < ApplicationController
+  before_action :find_comment, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, except: [:show, :index]
-  
+
   def new
     @comment = Comment.new
   end
@@ -18,7 +19,7 @@ class CommentsController < ApplicationController
   end
 
   def show
-    @comment = Comment.find params[:id]
+    # @comment = Comment.find params[:id]
   end
 
   def index
@@ -26,13 +27,13 @@ class CommentsController < ApplicationController
   end
 
   def edit
-    @comment = Comment.find params[:id]
+    # @comment = Comment.find params[:id]
     @post = Post.find params[:post_id]
   end
 
   def update
     @post = Post.find params[:post_id]
-    @comment = Comment.find params[:id]
+    # @comment = Comment.find params[:id]
     comment_params = params.require(:comment).permit(:body)
     if @comment.update comment_params
       redirect_to post_path(@post)
@@ -43,12 +44,16 @@ class CommentsController < ApplicationController
 
   def destroy
     post = Post.find params[:post_id]
-    comment = Comment.find params[:id]
+    # comment = Comment.find params[:id]
     comment.destroy
     redirect_to post_path(post), notice: "Comment deleted!"
   end
 
   private
+
+  def find_comment
+    @comment = Comment.find params[:id]
+  end
 
   def comment_params
     params.require(:comment).permit(:body)
