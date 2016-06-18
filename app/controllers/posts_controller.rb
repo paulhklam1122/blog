@@ -1,6 +1,7 @@
 class PostsController < ApplicationController
   before_action :find_post, only:[:show, :edit, :update, :destroy]
   before_action :authenticate_user!, except: [:show, :index]
+  before_action :authorize_owner, only: [:edit, :destroy, :update]
   def new
     @post = Post.new
   end
@@ -65,5 +66,9 @@ class PostsController < ApplicationController
 
   def authenticate_user!
     redirect_to new_sessions_path, alert: "please sign in" unless user_signed_in?
+  end
+
+  def authorize_owner
+    redirect_to root_path, alert: "Access Denied" unless can? :manage, @post
   end
 end
