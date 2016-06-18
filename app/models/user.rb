@@ -8,4 +8,12 @@ class User < ActiveRecord::Base
   def full_name
     "#{first_name} #{last_name}"
   end
+
+  before_create { generate_token(:auth_token) }
+  def generate_token(user)
+  begin
+    self[user] = SecureRandom.urlsafe_base64
+  end while User.exists?(user => self[user])
+end
+
 end

@@ -12,6 +12,9 @@ Rails.application.routes.draw do
   get "/changepassword" => "users#change_password", as: :change_password
   patch "/changepassword" => "users#update_password"
 
+
+  resources :password_resets
+
   resources :posts do
     get :search, on: :collection
     post :flag, on: :member
