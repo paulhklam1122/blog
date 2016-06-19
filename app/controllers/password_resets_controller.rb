@@ -22,16 +22,6 @@ class PasswordResetsController < ApplicationController
     @user = User.find_by_password_reset_token params[:password_reset_token]
   end
 
-  def update
-    @user = User.find_by_password_reset_token params[:password_reset_token]
-    user_params = params.permit(:password, :password_confirmation)
-    if @user.update user_params
-      redirect_to root_path, notice: "Information updated!"
-    else
-      redirect_to edit_user_path(@user), notice: "aaa"
-    end
-  end
-
   def reset_token
     SecureRandom.urlsafe_base64
   end

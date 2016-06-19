@@ -49,6 +49,17 @@ class UsersController < ApplicationController
     end
   end
 
+  def password_reset
+    @user = User.find_by_password_reset_token params[:password_reset_token]
+    # user_params = params.permit(:password, :password_confirmation)
+    if params[:new_password] == params[:new_password_confirmation]
+      @user.update password: params[:new_password]
+      redirect_to root_path, notice: "Password Successfully Reset!"
+    else
+      redirect_to new_password_reset_path(@user), notice: "Your new password and password confirmation do not match."
+    end
+  end
+
   private
 
   def user_params

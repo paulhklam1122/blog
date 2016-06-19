@@ -14,6 +14,8 @@ Rails.application.routes.draw do
 
 
   resources :password_resets
+  get "/password_resets" => "users#reset_password", as: :reset_password
+  patch "/password_resets" => "users#password_reset"
 
   resources :posts do
     get :search, on: :collection
