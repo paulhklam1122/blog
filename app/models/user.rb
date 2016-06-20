@@ -11,9 +11,26 @@ class User < ActiveRecord::Base
 
   before_create { generate_token(:auth_token) }
   def generate_token(user)
-  begin
-    self[user] = SecureRandom.urlsafe_base64
-  end while User.exists?(user => self[user])
-end
+    begin
+      self[user] = SecureRandom.urlsafe_base64
+    end while User.exists?(user => self[user])
+  end
 
+  def password_reset_token_expired?
+    password_reset_sent_at < 3.days.ago
+  end
+
+  def increment_login_lockout_count
+    if self.login_lockout_count <= 10
+      self.login_lockout_count += 1
+      update_attribute(:login_lockout_count, self.login_lockout_count)
+    else
+      update_attribute(:account_lockout, true)
+      update_attribute(:login_lockout_count, 0)
+    end
+  end
+
+  def unlock_account
+    update_attribute(:account_lockout, false)
+  end
 end

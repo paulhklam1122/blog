@@ -26,7 +26,6 @@ class UsersController < ApplicationController
     else
       flash[:alert] = "Invalid Information"
       render :edit
-      # @user.errors.add(:password, "The password you entered doest not match the current password in our records.")
     end
   end
   def change_password
@@ -38,6 +37,7 @@ class UsersController < ApplicationController
     if @user.authenticate(params[:password])
       if params[:new_password] == params[:new_password_confirmation]
         @user.update password: params[:new_password]
+        sign_in(@user)
         redirect_to root_path, notice: "Password Successfully Changed!"
       else
         flash[:alert] = "Your new password and confirmation do not match."
@@ -51,12 +51,13 @@ class UsersController < ApplicationController
 
   def password_reset
     @user = User.find_by_password_reset_token params[:password_reset_token]
-    # user_params = params.permit(:password, :password_confirmation)
-    if params[:new_password] == params[:new_password_confirmation]
-      @user.update password: params[:new_password]
+    if params[:new_password_reset] == params[:new_password_reset_confirmation]
+      @user.update password: params[:new_password_reset]
+      sign_in(@user)
       redirect_to root_path, notice: "Password Successfully Reset!"
     else
-      redirect_to new_password_reset_path(@user), notice: "Your new password and password confirmation do not match."
+      redirect_to new_password_reset_path(@user)
+      flash[:alert] = "Your new password and password confirmation do not match."
     end
   end
 
