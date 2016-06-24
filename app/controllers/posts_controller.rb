@@ -28,7 +28,7 @@ class PostsController < ApplicationController
       @posts = Post.search(params[:search]).order("created_at DESC")
     else
       # @posts = Post.all.order(created_at: :desc)
-      @posts = Post.paginate(:page => params[:page], :per_page => 7)
+      @posts = Post.order(created_at: :desc).page(params[:page]).per(7)
     end
   end
 
@@ -57,15 +57,11 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:title, :body)
+    params.require(:post).permit(:title, :body, {tag_ids: []})
   end
 
   def find_post
     @post = Post.find params[:id]
-  end
-
-  def authenticate_user!
-    redirect_to new_sessions_path, alert: "please sign in" unless user_signed_in?
   end
 
   def authorize_owner

@@ -2,58 +2,79 @@ require 'rails_helper'
 
 RSpec.describe PostsController, type: :controller do
   let(:create_post) {FactoryGirl.create(:post)}
+  let(:user)     { create(:user) }
 
   describe "#new" do
-    it "renders the new template" do
-      get :new
-      expect(response).to render_template(:new)
+    context "with user not signed in" do
+      it "redirects to new user page" do
+        expect(response).to redirect_to(new_sessions_path)
+      end
     end
-    it "instantiates a new post instance variable" do
-      get :new
-      expect(assigns(:post)).to be_a_new(Post)
+    context "with user signed in" do
+      before { request.session[:user_id] = user.id }
+      it "renders the new template" do
+        get :new
+        expect(response).to render_template(:new)
+      end
+      it "instantiates a new post instance variable" do
+        get :new
+        expect(assigns(:post)).to be_a_new(Post)
+      end
     end
   end
 
   describe "#create" do
-    context "with valid attributes" do
-      def valid_request
-        post :create, post: FactoryGirl.attributes_for(:post)
-      end
-
-      it "saves a record to the database" do
-        count_before = Post.count
-        valid_request
-        count_after = Post.count
-        expect(count_after).to eq(count_before + 1)
-      end
-      it "redirects to the show page of the blog" do
-        valid_request
-        expect(response).to redirect_to(posts_path(Post.last))
-      end
-      it "sets a flash notice message" do
-        valid_request
-        expect(flash[:notice]).to be
+    context "with user not signed in" do
+      it "redirects to new user page" do
+        post :create, post_id: post.id, create_post: {title: "My Post", body: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."}
+        expect(response).to redirect_to(new_sessions_path)
       end
     end
-
-    context "with invalid attributes" do
-      def invalid_request
-        post :create, post:{title: ""}
+    context "with user signed in" do
+      before { request.session[:user_id] = user.id }
+      context "with valid attributes" do
+        def valid_request
+          post :create, post: FactoryGirl.attributes_for(:post)
+        end
+        it "saves a record to the database" do
+          count_before = Post.count
+          valid_request
+          count_after = Post.count
+          expect(count_after).to eq(count_before + 1)
+        end
+        it "redirects to the show page of the blog" do
+          valid_request
+          expect(response).to redirect_to(posts_path(Post.last))
+        end
+        it "associates the post with the signed in user" do
+          valid_request
+          expect(Post.last.user).to eq(user)
+        end
+        it "sets a flash notice message" do
+          valid_request
+          expect(flash[:notice]).to be
+        end
       end
 
-      it "doesn't save a record on the database" do
-        count_before = Post.count
-        invalid_request
-        count_after = Post.count
-        expect(count_after).to eq(count_before)
-      end
-      it "renders the new template" do
-        invalid_request
-        expect(response).to render_template(:new)
-      end
-      it "sets a flash alert message" do
-        invalid_request
-        expect(flash[:alert]).to be
+      context "with invalid attributes" do
+        def invalid_request
+          post :create, post:{title: ""}
+        end
+
+        it "doesn't save a record on the database" do
+          count_before = Post.count
+          invalid_request
+          count_after = Post.count
+          expect(count_after).to eq(count_before)
+        end
+        it "renders the new template" do
+          invalid_request
+          expect(response).to render_template(:new)
+        end
+        it "sets a flash alert message" do
+          invalid_request
+          expect(flash[:alert]).to be
+        end
       end
     end
   end
@@ -140,15 +161,23 @@ RSpec.describe PostsController, type: :controller do
 
   describe "#destroy" do
     let!(:create_post) {FactoryGirl.create(:post)}
-    it "removed a record from the database" do
-      count_before = Post.count
-      delete :destroy, id: create_post.id
-      count_after = Post.count
-      expect(count_before).to eq(count_after + 1)
+    context "with user not signed in" do
+      it "redirects to the sign in page" do
+        expect(response).to redirect_to(new_sessions_path)
+      end
     end
-    it "redirects to the posts_path (listings page)" do
-      delete :destroy, id: create_post.id
-      expect(response).to redirect_to(posts_path)
+    context "with user signed in" do
+      before { request.session[:user_id] = user.id }
+      it "removed a record from the database" do
+        count_before = Post.count
+        delete :destroy, id: create_post.id
+        count_after = Post.count
+        expect(count_before).to eq(count_after + 1)
+      end
+      it "redirects to the posts_path (listings page)" do
+        delete :destroy, id: create_post.id
+        expect(response).to redirect_to(posts_path)
+      end
     end
   end
 end

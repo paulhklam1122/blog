@@ -22,6 +22,7 @@ Rails.application.routes.draw do
     post :flag, on: :member
     post :mark_done
     resources :comments, only: [:create, :edit, :destroy, :update]
+    resources :favourites, only:[:create, :destroy]
   # get "/posts/new" => "posts#new", as: :new_post
   # post "/posts" => "posts#create", as: :posts
   # get "/posts" => "posts#index"
@@ -32,7 +33,11 @@ Rails.application.routes.draw do
   end
   get "/posts/search" => "posts#search"
   post "/posts/search" => "posts#search", as: :search
+
+  resources :favourites, only:[:index]
+
 end
+
 
   # resources :comments
   # get "/comments/new" => "comments#new", as: :new_comment

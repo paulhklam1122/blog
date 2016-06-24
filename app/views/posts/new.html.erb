@@ -11,6 +11,10 @@
     <%= f.text_area :body %>
   </div>
   <div>
+    <%= f.label :tag_ids %>
+    <%= f.collection_check_boxes(:tag_ids, Tag.order(:title), :id, :title) %>
+  </div>
+  <div>
     <%= f.collection_select :category_id, Category.all, :id, :title %>
   </div>
   <%= f.submit %>

@@ -13,6 +13,7 @@ class CommentsController < ApplicationController
     @comment.user = current_user
     @comment.post = @post
     if @comment.save
+      CommentsMailer.notify_post_owner(@comment).deliver_now if should_notify?
       redirect_to post_path(@post), notice: "Comment created!"
     else
       render "/posts/show"
@@ -63,5 +64,9 @@ class CommentsController < ApplicationController
 
   def authorize_owner
     redirect_to root_path, alert: "Access Denied" unless can? :manage, @comment
+  end
+
+  def should_notify?
+    @post.user != current_user
   end
 end

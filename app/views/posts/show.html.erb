@@ -1,6 +1,13 @@
 <h1><%= @post.title.titleize %></h1>
 <p>Created by: <%= @post.user.full_name if @post.user%></p>
+<p>Tags: <%= @post.tags.map {|t| t.title.capitalize}.join(", ") %></p>
 <p><%= @post.body %></p>
+
+<% if @post.favourited_by?(current_user) %>
+  <%= link_to fa_icon("thumbs-up"), post_favourite_path(@post, @post.favourite_for(current_user)), method: :delete, class: "like-icon" %>
+<% else %>
+<%= link_to fa_icon("thumbs-o-up"), post_favourites_path(@post), method: :post, class: "like-icon" %>
+<% end %>
 
 <% if can? :manage, @post %>
 <%= link_to "Edit", edit_post_path(@post) %>
@@ -10,7 +17,7 @@
 <% end %>
 
 <h2>Create a Comment</h2>
-<%#= @comment.errors.full_messages.join(", ") %>
+<%= @comment.errors.full_messages.join(", ") %>
 <%= form_for [@post, @comment] do |f| %>
 <div>
   <%= f.text_area :body %>

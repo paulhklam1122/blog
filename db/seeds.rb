@@ -36,3 +36,7 @@ Post.all.each do |post|
     post.comments.create(body: Faker::Company.bs, user_id: comment_user)
   end
 end
+
+30.times do
+  Tag.create title: Faker::Hacker.adjective
+end

@@ -9,7 +9,7 @@
   <% if params[:search] %>
     <% @posts = Post.search(params[:search]).order("created_at DESC") %>
   <% else %>
-    <%= will_paginate @posts %>
+    <%= paginate @posts %>
   <% end %>
 
 </div>
