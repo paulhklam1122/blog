@@ -20,4 +20,9 @@ class ApplicationController < ActionController::Base
   def authenticate_user!
     redirect_to new_sessions_path, alert: "please sign in" unless user_signed_in?
   end
+
+  def current_post
+  @current_post ||= Post.find params[:post_id]
+  end
+
 end

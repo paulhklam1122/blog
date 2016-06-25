@@ -54,6 +54,11 @@ class PostsController < ApplicationController
     redirect_to posts_path
   end
 
+  def current_user_rate
+    @post.rate_for(current_user)
+  end
+  helper_method :current_user_rate
+
   private
 
   def post_params

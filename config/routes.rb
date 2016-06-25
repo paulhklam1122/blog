@@ -18,11 +18,12 @@ Rails.application.routes.draw do
   # patch "/password_resets" => "users#password_reset"
 
   resources :posts do
-    get :search, on: :collection
     post :flag, on: :member
     post :mark_done
     resources :comments, only: [:create, :edit, :destroy, :update]
     resources :favourites, only:[:create, :destroy]
+    resources :ratings, only:[:create, :update, :destroy]
+    get :search, on: :collection
   # get "/posts/new" => "posts#new", as: :new_post
   # post "/posts" => "posts#create", as: :posts
   # get "/posts" => "posts#index"
