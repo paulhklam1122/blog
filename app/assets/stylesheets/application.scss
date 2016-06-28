@@ -33,10 +33,10 @@ li {
 //   text-align: center
 // }
 //
-// nav a {
-//   text-decoration: none;
-//   color: white;
-// }
+nav a {
+  text-decoration: none;
+  color: white;
+}
 //
 a:hover {
   color:#0e00ad;
@@ -48,11 +48,11 @@ a {
   text-align: center;
   color: #3561d2;
 }
-//
-// .field_with_errors input {
-//   border-color: red
-// }
-//
+
+.field_with_errors input {
+  border-color: red
+}
+
 body {
   background-color: #f28175;
 }

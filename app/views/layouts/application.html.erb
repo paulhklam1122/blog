@@ -7,7 +7,7 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <nav class="navbar navbar-default" style="background:#82c746; font-size: 20px">
+  <nav class="navbar navbar-default navbar-fixed-top" style="background:#82c746; font-size: 20px">
     <ul class="nav navbar-nav">
       <li><%= link_to "Home", root_path %></li>
       <li><%= link_to "About", about_path %></li>
@@ -25,12 +25,12 @@
       <% end %>
     </ul>
   </nav>
-<% if flash[:notice] %>
-  <div class="flash-notice"><%= flash[:notice] %></div>
-<% elsif flash[:alert] %>
-  <div class="flash-alert"><%= flash[:alert] %></div>
-<% end %>
   <div class="jumbotron" style="background:#f28175">
+    <% if flash[:notice] %>
+      <div class="flash-notice"><%= flash[:notice] %></div>
+    <% elsif flash[:alert] %>
+      <div class="flash-alert"><%= flash[:alert] %></div>
+    <% end %>
     <div class="container text-center">
         <%= yield %>
     </div>
