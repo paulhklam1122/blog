@@ -61,7 +61,7 @@
 
 <h2>Create a Comment</h2>
 <%= @comment.errors.full_messages.join(", ") %>
-<%= form_for [@post, @comment] do |f| %>
+<%= bootstrap_form_for [@post, @comment] do |f| %>
 <div>
   <%= f.text_area :body %>
 </div>

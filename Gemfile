@@ -33,7 +33,9 @@ gem 'faker', github: "stympy/faker"
 gem "letter_opener", group: :development
 gem 'delayed_job_active_record'
 gem 'delayed_job_web'
-
+gem 'bootstrap-sass'
+gem 'bootstrap-glyphicons'
+gem 'bootstrap_form'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

@@ -7,28 +7,32 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <nav>
-    <%= link_to "Home", root_path %> |
-    <%= link_to "About", about_path %> |
-    <%= link_to "New Post", new_post_path %> |
-    <%= link_to "All Posts", posts_path %> |
-    <% if user_signed_in? %>
-      <%= link_to "All Favourites", favourites_path %> |
-      Signed in as: <%= link_to "#{current_user.full_name}", edit_user_path(session[:user_id])%> |
-      <%= link_to "Sign Out", sessions_path, method: :delete %>
-    <% else %>
-      <%= link_to "Sign Up", new_user_path %> |
-      <%= link_to "Sign In", new_sessions_path %>
-    <% end %>
+  <nav class="navbar navbar-default" style="background:#82c746; font-size: 20px">
+    <ul class="nav navbar-nav">
+      <li><%= link_to "Home", root_path %></li>
+      <li><%= link_to "About", about_path %></li>
+      <li><%= link_to "New Post", new_post_path %></li>
+      <li><%= link_to "All Posts", posts_path %></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <% if user_signed_in? %>
+        <li><%= link_to "All Favourites", favourites_path %></li>
+        <li><%= link_to "Signed in as: #{current_user.full_name}", edit_user_path(session[:user_id])%></li>
+        <li><%= link_to "Sign Out", sessions_path, method: :delete %></li>
+      <% else %>
+        <li><%= link_to "Sign Up", new_user_path %></li>
+        <li><%= link_to "Sign In", new_sessions_path %></li>
+      <% end %>
+    </ul>
   </nav>
-  <div class="container">
-    <% if flash[:notice] %>
-      <div class="flash-notice"><%= flash[:notice] %></div>
-    <% elsif flash[:alert] %>
-      <div class="flash-alert"><%= flash[:alert] %></div>
-    <% end %>
-    <div class="content">
-      <%= yield %>
+<% if flash[:notice] %>
+  <div class="flash-notice"><%= flash[:notice] %></div>
+<% elsif flash[:alert] %>
+  <div class="flash-alert"><%= flash[:alert] %></div>
+<% end %>
+  <div class="jumbotron" style="background:#f28175">
+    <div class="container text-center">
+        <%= yield %>
     </div>
   </div>
 </body>

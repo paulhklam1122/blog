@@ -7,7 +7,6 @@ class PostsController < ApplicationController
   end
   def create
     # post_params = params.require(:post).permit(:title, :body)
-    post_params
     @post = Post.new post_params
     @post.user = current_user
     if @post.save
@@ -28,7 +27,7 @@ class PostsController < ApplicationController
       @posts = Post.search(params[:search]).order("created_at DESC")
     else
       # @posts = Post.all.order(created_at: :desc)
-      @posts = Post.order(created_at: :desc).page(params[:page]).per(7)
+      @posts = Post.order(created_at: :desc).page(params[:page]).per(8)
     end
   end
 
@@ -51,7 +50,7 @@ class PostsController < ApplicationController
   def destroy
     # @post = Post.find params[:id]
     @post.destroy
-    redirect_to posts_path
+    redirect_to posts_path, notice: "Post deleted!"
   end
 
   def current_user_rate

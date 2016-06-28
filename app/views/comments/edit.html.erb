@@ -1,12 +1,10 @@
 <h1>Editing Comment</h1>
 
 <%= @comment.errors.full_messages.join(", ") %>
-<%= form_for [@post, @comment] do |f| %>
-  <div>
-    <%= f.label :body %>
+<%= bootstrap_form_for [@post, @comment] do |f| %>
+  <div class="content text-left" >
+    <%#= f.label :body %>
     <%= f.text_area :body %>
-  </div>
-  <div>
-    <%= f.submit %>
+    <%= f.submit "Update Comment", class: "btn btn-large btn-primary" %>
   </div>
 <% end %>

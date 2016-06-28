@@ -1,8 +1,7 @@
 <h1>Reset Password</h1>
-<%= form_tag(password_resets_path, method: :post)  do %>
-<div>
- <%= label_tag "Please type in your email" %>
- <%= email_field_tag :email, params[:email] %>
-</div>
-<%= submit_tag "Reset Password" %>
+<%= bootstrap_form_tag url: password_resets_path, method: :post  do |f| %>
+<div class="content text-left" >
+  <%= f.email_field :email %>
+  <%= submit_tag "Reset Password", class: "btn btn-default btn-primary" %>
 <% end %>
+</div>

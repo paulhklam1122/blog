@@ -18,7 +18,7 @@ class ApplicationController < ActionController::Base
   end
 
   def authenticate_user!
-    redirect_to new_sessions_path, alert: "please sign in" unless user_signed_in?
+    redirect_to new_sessions_path, alert: "Please Sign In" unless user_signed_in?
   end
 
   def current_post

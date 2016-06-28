@@ -34,7 +34,7 @@ class UsersController < ApplicationController
 
   def update_password
     @user = User.find session[:user_id]
-    if @user.authenticate(params[:password])
+    if @user.authenticate(params[:current_password])
       if params[:new_password] == params[:new_password_confirmation]
         @user.update password: params[:new_password]
         sign_in(@user)

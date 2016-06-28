@@ -1,12 +1,12 @@
 <h1>Editing Post</h1>
 
-<%= form_for @post do |f| %>
+<%= bootstrap_form_for @post do |f| %>
   <div>
-    <%= f.label :title %>
+    <%#= f.label :title %>
     <%= f.text_field :title %>
   </div>
   <div>
-    <%= f.label :body %>
+    <%#= f.label :body %>
     <%= f.text_area :body %>
   </div>
   <div>
