@@ -28,7 +28,7 @@ class PasswordResetsController < ApplicationController
 
   def update
     @user = User.find params[:id]
-    user_params = params.permit(:password, :password_confirmation)
+    user_params = params.permit(:new_password, :new_password_confirmation)
     if @user.update user_params
       @user.unlock_account
       redirect_to root_path, notice: "Password Successfully Reset!"

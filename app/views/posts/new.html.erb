@@ -2,20 +2,11 @@
 
 <%= @post.errors.full_messages.join(", ") %>
 <%= bootstrap_form_for @post do |f| %>
-  <div>
-    <%#= f.label :title %>
+  <div class="content text-left" >
     <%= f.text_field :title %>
-  </div>
-  <div>
-    <%#= f.label :body %>
     <%= f.text_area :body %>
-  </div>
-  <div>
-    <%#= f.label :tag_ids %>
     <%= f.collection_check_boxes(:tag_ids, Tag.order(:title), :id, :title) %>
-  </div>
-  <div>
     <%= f.collection_select :category_id, Category.all, :id, :title %>
-  </div>
-  <%= f.submit %>
+  <%= f.submit class: "btn btn-default btn-primary" %>
 <% end %>
+</div>

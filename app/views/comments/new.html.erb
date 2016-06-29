@@ -2,11 +2,8 @@
 
 <%= @comment.errors.full_messages.join(", ") %>
 <%= bootstrap_form_for @comment do |f| %>
-  <div>
-    <%#= f.label :body %>
+  <div class="content text-left" >
     <%= f.text_area :body %>
-  </div>
-  <div>
-    <%= f.submit %>
-  </div>
+    <%= f.submit class: "btn btn-default btn-primary" %>
 <% end %>
+  </div>

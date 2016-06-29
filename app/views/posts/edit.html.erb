@@ -1,15 +1,9 @@
 <h1>Editing Post</h1>
 
 <%= bootstrap_form_for @post do |f| %>
-  <div>
-    <%#= f.label :title %>
+  <div class="content text-left" >
     <%= f.text_field :title %>
-  </div>
-  <div>
-    <%#= f.label :body %>
     <%= f.text_area :body %>
-  </div>
-  <div>
     <%= f.submit %>
-  </div>
 <% end %>
+  </div>

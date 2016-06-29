@@ -1,20 +1,11 @@
 <h1>Edit User Information</h1>
 <%= @user.errors.full_messages.join(", ") %>
 <%= bootstrap_form_for @user do |f| %>
-  <div>
-    <%#= f.label :first_name %>
+  <div class="content text-left">
     <%= f.text_field :first_name %>
-  </div>
-  <div>
-    <%#= f.label :last_name %>
     <%= f.text_field :last_name %>
-  </div>
-  <div>
-    <%#= f.label :email %>
     <%= f.email_field :email %>
-  </div>
-  <div>
+    <%= f.submit class: "btn btn-large btn-primary"  %>
     <%= link_to "Change Password", change_password_path %>
-    <%= f.submit %>
   </div>
 <% end %>

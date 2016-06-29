@@ -2,19 +2,15 @@
 <%= @user.errors.full_messages.join(", ") %>
 <%= bootstrap_form_for @user do |f| %>
   <div class="content text-left" >
-    <%#= f.label :first_name %>
+
     <%= f.text_field :first_name %>
 
-    <%#= f.label :last_name %>
     <%= f.text_field :last_name %>
 
-    <%#= f.label :email %>
     <%= f.email_field :email %>
 
-    <%#= f.label :password %>
     <%= f.password_field :password %>
 
-    <%#= f.label :password_confirmation %>
     <%= f.password_field :password_confirmation %>
   </div>
   <%= f.submit "Create User", class: "btn btn-large btn-primary" %>
