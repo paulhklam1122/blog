@@ -12,7 +12,7 @@
 # end
 User.create(first_name: "Paul", last_name: "Lam", email: "paullam007@gmail.com", password: "p", is_admin: true)
 
-User.create(first_name: "Carey", last_name: "Lau", email: "ccliu2012@gmail.com", password: "t")
+User.create(first_name: "John", last_name: "Doe", email: "johndoe@gmail.com", password: "j")
 
 User.create(first_name: "Tofu", last_name: "Tofu", email: "tofu@gmail.com", password: "t")
 
