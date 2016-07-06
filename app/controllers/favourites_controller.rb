@@ -5,23 +5,22 @@ class FavouritesController < ApplicationController
     @posts = current_user.favourite_posts
   end
   def create
-    post = Post.find params[:post_id]
-    f = Favourite.new(post: post, user: current_user)
-    if f.save
-      redirect_to post_path(post), notice: "Thanks for favouriting!"
-    else
-      redirect_to post_path(post), alert: "Failed to favourite."
+    @post = Post.find params[:post_id]
+    @favourite = Favourite.new(post: @post, user: current_user)
+    @favourite.save
+    respond_to do |format|
+      format.html {redirect_to post_path(@post), notice: "Thanks for favouriting!"}
+      format.js {render :toggle_heart}
     end
   end
 
   def destroy
-    favourite = Favourite.find params[:id]
-    post = Post.find params[:post_id]
-    favourite.destroy
-    if can? :destroy, Favourite
-      redirect_to post_path(post), notice: "Un-favourited"
-    else
-      redirect_to post_path(post), alert: "Failed to Un-favourite"
+    @favourite = Favourite.find params[:id]
+    @post = Post.find params[:post_id]
+    @favourite.destroy if can? :destroy, Favourite
+    respond_to do |format|
+      format.html {redirect_to post_path(@post), notice: "Un-favourited"}
+      format.js {render :toggle_heart}
     end
   end
 end

@@ -1,0 +1,5 @@
+<%= @comment.errors.full_messages.join(", ") %>
+<%= bootstrap_form_for [@post, @comment], remote: true do |f| %>
+  <%= f.text_area :body %>
+  <%= f.submit class: "btn btn-large btn-primary" %>
+<% end %>

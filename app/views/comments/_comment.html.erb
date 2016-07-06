@@ -1,0 +1,10 @@
+<div id="<%= dom_id(comment) %>">
+<p>Created by: <%= comment.user.full_name if comment.user %></p>
+<%= comment.body %>
+<%= link_to "Edit", edit_post_comment_path(@post, comment) %>
+<%= link_to "Delete", post_comment_path(@post, comment),
+                          method: :delete,
+                          remote: true,
+                          data: {confirm: "Are you sure?"}%>
+<hr>
+</div>

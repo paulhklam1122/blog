@@ -47,9 +47,9 @@
 <p><%= @post.body %></p>
 
 <% if @post.favourited_by?(current_user) %>
-  <%= link_to fa_icon("thumbs-up"), post_favourite_path(@post, @post.favourite_for(current_user)), method: :delete, class: "like-icon" %>
+  <%= link_to fa_icon("heart"), post_favourite_path(@post, @post.favourite_for(current_user)), method: :delete, remote: true, class: "like-icon" %>
 <% else %>
-<%= link_to fa_icon("thumbs-o-up"), post_favourites_path(@post), method: :post, class: "like-icon" %>
+  <%= link_to fa_icon("heart-o"), post_favourites_path(@post), method: :post, remote: true, class: "like-icon" %>
 <% end %>
 
 <% if can? :manage, @post %>
@@ -60,19 +60,13 @@
 <% end %>
 
 <h2>Create a Comment</h2>
-<%= @comment.errors.full_messages.join(", ") %>
-<%= bootstrap_form_for [@post, @comment] do |f| %>
-  <%= f.text_area :body %>
-<%= f.submit class: "btn btn-default btn-primary" %>
-<% end %>
+<div id="comment-form">
+  <%= render "comments/form" %>
+</div>
 
 <h2>Comments</h2>
-<% @post.new_first_comments.each do |comment| %>
-  <p>Created by: <%= comment.user.full_name if comment.user %></p>
-  <%= comment.body %>
-  <%= link_to "Edit", edit_post_comment_path(@post, comment) %>
-  <%= link_to "Delete", post_comment_path(@post, comment),
-                            method: :delete,
-                            data: {confirm: "Are you sure?"}%>
-<hr>
-<% end %>
+<div id="comments">
+  <% @post.new_first_comments.each do |comment| %>
+    <%= render "/comments/comment", comment: comment %>
+  <% end %>
+</div>

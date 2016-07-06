@@ -33,10 +33,7 @@ li {
 //   text-align: center
 // }
 //
-nav a {
-  text-decoration: none;
-  color: white;
-}
+
 //
 a:hover {
   color:#0e00ad;
@@ -95,4 +92,8 @@ body {
 
 .navbar.navbar-default.navbar-fixed-top li a{
     color: #1343de;
+}
+
+.navbar.navbar-default.navbar-fixed-top {
+  padding-right: 15px;
 }
