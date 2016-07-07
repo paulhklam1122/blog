@@ -36,6 +36,7 @@ Rails.application.routes.draw do
   post "/posts/search" => "posts#search", as: :search
 
   resources :favourites, only:[:index]
+  resources :clients
 
 end
 
