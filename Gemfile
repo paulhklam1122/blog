@@ -37,6 +37,7 @@ gem 'bootstrap-sass'
 gem 'bootstrap-glyphicons'
 gem 'bootstrap_form'
 gem 'active_model_serializers'
+gem 'simple_form'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

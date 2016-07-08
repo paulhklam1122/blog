@@ -7,6 +7,7 @@ class Post < ActiveRecord::Base
   has_many :ratings, dependent: :destroy
   has_many :rating_users, through: :ratings, source: :user
   belongs_to :user
+  belongs_to :category
   validates :title, presence: {message: "must be present!"}, uniqueness: true, length: {minimum: 7}
   validates :body, presence: true
 

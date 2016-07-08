@@ -1,4 +1,4 @@
-b$(document).ready(function(){
+$(document).ready(function(){
   var refreshPosts = function(){
     $.get("/clients", function(data){
       $('#posts').html("");

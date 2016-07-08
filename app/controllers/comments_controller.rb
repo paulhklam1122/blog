@@ -14,8 +14,6 @@ class CommentsController < ApplicationController
     @comment.post = @post
 
     respond_to do |format|
-      render :fire
-
       if @comment.save
         # CommentsMailer.notify_post_owner(@comment).deliver_now if should_notify?
         format.html {redirect_to post_path(@post), notice: "Comment created!"}

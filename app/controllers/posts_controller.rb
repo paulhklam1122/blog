@@ -61,7 +61,7 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:title, :body, {tag_ids: []})
+    params.require(:post).permit(:title, :body, {tag_ids: []}, :category_id)
   end
 
   def find_post
