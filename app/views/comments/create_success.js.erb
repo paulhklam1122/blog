@@ -1,8 +1,6 @@
-var $newComment = $("<%= j(render('/comments/comment', {comment: @comment})) %>")
+$('#comments').prepend("<%= j(render('/comments/comment', {comment: @comment})) %>");
 
-$('#comments').prepend($newComment)
-
-$newComment.hide().slideDown(1000);
+$("#<%= dom_id(@comment) %>").hide().delay().slideDown(1000);
 
 <% @comment = Comment.new %>
 $('#comment-form').html('<%= j render "form" %>')
