@@ -38,6 +38,8 @@ gem 'bootstrap-glyphicons'
 gem 'bootstrap_form'
 gem 'active_model_serializers'
 gem 'simple_form'
+gem 'carrierwave'
+gem 'mini_magick'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

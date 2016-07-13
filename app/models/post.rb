@@ -11,6 +11,8 @@ class Post < ActiveRecord::Base
   validates :title, presence: {message: "must be present!"}, uniqueness: true, length: {minimum: 7}
   validates :body, presence: true
 
+  mount_uploader :image, ImageUploader
+
   def self.search(search)
     where("title ILIKE ? OR body ILIKE ?", "%#{search}%", "%#{search}%")
   end

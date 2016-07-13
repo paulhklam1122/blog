@@ -1,9 +1,9 @@
 <h1>New Comment</h1>
 
 <%= @comment.errors.full_messages.join(", ") %>
-<%= bootstrap_form_for @comment do |f| %>
+<%= simple_form_for @comment do |f| %>
   <div class="content text-left" >
-    <%= f.text_area :body %>
-    <%= f.submit class: "btn btn-default btn-primary" %>
+    <%= f.input :body %>
+    <%= f.button :submit, class: "btn btn-default btn-primary" %>
 <% end %>
   </div>

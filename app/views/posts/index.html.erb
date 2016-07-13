@@ -17,6 +17,6 @@
 
   <div class="list-group">
     <% @posts.each do |post| %>
-    <div class="list-group-item col-md-3 col-sm-4 col-xs-12"><%= link_to post.title, post_path(post) %></div>
+    <div class="list-group-item col-md-3 col-sm-4 col-xs-12"><%= link_to post.title, post_path(post) %><%= image_tag @post.image.url(:thumb) %></div>    
     <% end %>
   </div>
