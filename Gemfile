@@ -36,6 +36,11 @@ gem 'delayed_job_web'
 gem 'bootstrap-sass'
 gem 'bootstrap-glyphicons'
 gem 'bootstrap_form'
+gem 'simple_form'
+gem 'active_model_serializers'
+gem 'omniauth-twitter'
+gem 'twitter'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

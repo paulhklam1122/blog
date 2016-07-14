@@ -1,4 +1,6 @@
 class Post < ActiveRecord::Base
+  attr_accessor :tweet_it
+  
   has_many :comments, dependent: :destroy
   has_many :favourites, dependent: :destroy
   has_many :users, through: :favourites
@@ -6,6 +8,7 @@ class Post < ActiveRecord::Base
   has_many :tags, through: :taggings
   has_many :ratings, dependent: :destroy
   has_many :rating_users, through: :ratings, source: :user
+  belongs_to :category
   belongs_to :user
   validates :title, presence: {message: "must be present!"}, uniqueness: true, length: {minimum: 7}
   validates :body, presence: true

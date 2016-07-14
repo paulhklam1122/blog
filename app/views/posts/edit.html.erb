@@ -1,9 +1,9 @@
 <h1>Editing Post</h1>
 
-<%= bootstrap_form_for @post do |f| %>
+<%= simple_form_for @post do |f| %>
   <div class="content text-left" >
-    <%= f.text_field :title %>
-    <%= f.text_area :body %>
-    <%= f.submit %>
+    <%= f.input :title %>
+    <%= f.input :body %>
+    <%= f.button :submit %>
 <% end %>
   </div>

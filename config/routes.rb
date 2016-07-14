@@ -9,6 +9,9 @@ Rails.application.routes.draw do
     delete :destroy, on: :collection
   end
 
+  get "/auth/twitter", as: :sign_in_with_twitter
+  get "/auth/twitter/callback" => "callbacks#twitter"
+
   get "/changepassword" => "users#change_password", as: :change_password
   patch "/changepassword" => "users#update_password"
 

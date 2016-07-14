@@ -1,12 +1,18 @@
 <h1>New Post</h1>
 
-<%= @post.errors.full_messages.join(", ") %>
-<%= bootstrap_form_for @post do |f| %>
-  <div class="content text-left" >
-    <%= f.text_field :title %>
-    <%= f.text_area :body %>
-    <%= f.collection_check_boxes(:tag_ids, Tag.order(:title), :id, :title) %>
-    <%= f.collection_select :category_id, Category.all, :id, :title %>
-  <%= f.submit class: "btn btn-default btn-primary" %>
+
+<%= simple_form_for @post do |f| %>
+  <div class="text-left" >
+    <%= f.input :title %>
+    <%= f.input :body %>
+    <%#= f.collection_check_boxes(:tag_ids, Tag.order(:title), :id, :title) %>
+    <%#= f.collection_select :category_id, Category.all, :id, :title %>
+    <%= f.association :tags, as: :check_boxes %>
+    <%= f.association :category, include_blank: false %>
+
+    <% if current_user.using_twitter? && !@post.persisted? %>
+      <%= f.input :tweet_it, as: :boolean %>
+    <% end %>
+  <%= f.button :submit, class: "btn btn-default btn-primary" %>
 <% end %>
 </div>

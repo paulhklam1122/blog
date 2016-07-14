@@ -10,6 +10,15 @@ class PostsController < ApplicationController
     @post = Post.new post_params
     @post.user = current_user
     if @post.save
+      if @post.tweet_it
+        client = Twitter::REST::Client.new do |config|
+          config.consumer_key        = ENV["TWITTER_CONSUMER_KEY"]
+          config.consumer_secret     = ENV["TWITTER_CONSUMER_SECRET"]
+          config.access_token         = current_user.twitter_token
+          config.access_token_secret = current_user.twitter_secret
+        end
+        client.update "Post: #{@post.title} #{post_url(@post)}"
+      end
       redirect_to posts_path(@post), notice: "Post created"
     else
       flash[:alert] = "Post not created"
@@ -61,7 +70,7 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:title, :body, {tag_ids: []})
+    params.require(:post).permit(:title, :body, :category_id, :tweet_it, {tag_ids: []})
   end
 
   def find_post

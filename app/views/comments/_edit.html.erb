@@ -6,9 +6,9 @@
 <h1>Editing Comment</h1>
 
 <%= @comment.errors.full_messages.join(", ") %>
-<%= bootstrap_form_for [@post, comment], remote: true do |f| %>
+<%= simple_form_for [@post, comment], remote: true do |f| %>
   <div class="content" >
-    <%= f.text_area :body %>
-    <%= f.submit class: "btn btn-large btn-primary", remote: true %>
+    <%= f.input :body %>
+    <%= f.button :submit, class: "btn btn-large btn-primary", remote: true %>
   </div>
 <% end %>
