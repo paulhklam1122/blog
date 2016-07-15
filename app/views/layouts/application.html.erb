@@ -9,7 +9,7 @@
   <link href='https://fonts.googleapis.com/css?family=Yellowtail' rel='stylesheet' type='text/css'>
 </head>
 <body>
-  <nav class="navbar navbar-default navbar-fixed-top" style="background:#82c746; font-size: 20px">
+  <nav class="navbar navbar-dark bg-primary navbar-fixed-top" style="font-size: 20px">
     <ul class="nav navbar-nav">
       <li><%= link_to "Home", root_path %></li>
       <li><%= link_to "About", about_path %></li>
@@ -24,7 +24,9 @@
       <% else %>
         <li><%= link_to "Sign Up", new_user_path %></li>
         <li><%= link_to "Sign In", new_sessions_path %></li>
-        <li><%= link_to "Sign In with Twitter", sign_in_with_twitter_path %></li>
+        <%= link_to sign_in_with_twitter_path do %>
+          <button class="btn btn-social btn-twitter"><span class="fa fa-twitter"></span>Sign in with Twitter</button>
+        <% end %>
       <% end %>
     </ul>
   </nav>

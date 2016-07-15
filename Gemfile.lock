@@ -62,6 +62,8 @@ GEM
     bootstrap-sass (3.3.6)
       autoprefixer-rails (>= 5.2.1)
       sass (>= 3.3.4)
+    bootstrap-social-rails (4.12.0)
+      railties (>= 3.1)
     bootstrap_form (2.4.0)
     buftok (0.2.0)
     builder (3.2.2)
@@ -286,6 +288,7 @@ DEPENDENCIES
   bcrypt (~> 3.1.7)
   bootstrap-glyphicons
   bootstrap-sass
+  bootstrap-social-rails
   bootstrap_form
   byebug
   cancancan (~> 1.10)

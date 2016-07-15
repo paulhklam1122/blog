@@ -13,6 +13,7 @@
  *= require font-awesome
  *= bootstrap_and_overrides
  *= require_self
+ *= require bootstrap-social
  */
 
  // @import "bootstrap-sprockets";
@@ -90,10 +91,18 @@ body {
   margin: 5px;
 }
 
-.navbar.navbar-default.navbar-fixed-top li a{
-    color: #1343de;
+.navbar.navbar-dark.bg-primary.navbar-fixed-top li a{
+  color: white;
+  margin: auto;
 }
 
-.navbar.navbar-default.navbar-fixed-top {
-  padding-right: 15px;
+.navbar.navbar-dark.bg-primary.navbar-fixed-top li a:hover {
+  background-color: #0038ff;
+}
+.navbar.navbar-dark.bg-primary.navbar-fixed-top {
+  padding-right: 25px;
+}
+
+.btn.btn-social.btn-twitter {
+  margin-top: 7px;
 }
