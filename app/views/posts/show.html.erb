@@ -1,72 +1,76 @@
-<h1><%= @post.title.titleize %></h1>
-<p>Created by: <%= @post.user.full_name if @post.user%></p>
-<p>Tags: <%= @post.tags.map {|t| t.title.capitalize}.join(", ") %></p>
-<% if @post.rated_1_by?(current_user) %>
-  <%= link_to fa_icon("star"), post_rating_path(@post, current_user_rate), method: :delete %>
-  <%= link_to fa_icon("star-o"), post_rating_path(@post, current_user_rate, rating: {star_count: 2}), method: :patch %>
-  <%= link_to fa_icon("star-o"), post_rating_path(@post, current_user_rate, rating: {star_count: 3}), method: :patch %>
-  <%= link_to fa_icon("star-o"), post_rating_path(@post, current_user_rate, rating: {star_count: 4}), method: :patch %>
-  <%= link_to fa_icon("star-o"), post_rating_path(@post, current_user_rate, rating: {star_count: 5}), method: :patch %>
-  <%= link_to "Clear", post_rating_path(@post, current_user_rate), method: :delete %>
-<% elsif @post.rated_2_by?(current_user) %>
-  <%= link_to fa_icon("star"), post_rating_path(@post, current_user_rate, rating: {star_count: 1}), method: :patch %>
-  <%= link_to fa_icon("star"), post_rating_path(@post, current_user_rate), method: :delete %>
-  <%= link_to fa_icon("star-o"), post_rating_path(@post, current_user_rate, rating: {star_count: 3}), method: :patch %>
-  <%= link_to fa_icon("star-o"), post_rating_path(@post, current_user_rate, rating: {star_count: 4}), method: :patch %>
-  <%= link_to fa_icon("star-o"), post_rating_path(@post, current_user_rate, rating: {star_count: 5}), method: :patch %>
-  <%= link_to "Clear", post_rating_path(@post, current_user_rate), method: :delete %>
-<% elsif @post.rated_3_by?(current_user) %>
-  <%= link_to fa_icon("star"), post_rating_path(@post, current_user_rate, rating: {star_count: 1}), method: :patch %>
-  <%= link_to fa_icon("star"), post_rating_path(@post, current_user_rate, rating: {star_count: 2}), method: :patch %>
-  <%= link_to fa_icon("star"), post_rating_path(@post, current_user_rate), method: :delete %>
-  <%= link_to fa_icon("star-o"), post_rating_path(@post, current_user_rate, rating: {star_count: 4}), method: :patch %>
-  <%= link_to fa_icon("star-o"), post_rating_path(@post, current_user_rate, rating: {star_count: 5}), method: :patch %>
-  <%= link_to "Clear", post_rating_path(@post, current_user_rate), method: :delete %>
-<% elsif @post.rated_4_by?(current_user) %>
-  <%= link_to fa_icon("star"), post_rating_path(@post, current_user_rate, rating: {star_count: 1}), method: :patch %>
-  <%= link_to fa_icon("star"), post_rating_path(@post, current_user_rate, rating: {star_count: 2}), method: :patch %>
-  <%= link_to fa_icon("star"), post_rating_path(@post, current_user_rate, rating: {star_count: 3}), method: :patch %>
-  <%= link_to fa_icon("star"), post_rating_path(@post, current_user_rate), method: :delete %>
-  <%= link_to fa_icon("star-o"), post_rating_path(@post, current_user_rate, rating: {star_count: 5}), method: :patch %>
-  <%= link_to "Clear", post_rating_path(@post, current_user_rate), method: :delete %>
-<% elsif @post.rated_5_by?(current_user) %>
-  <%= link_to fa_icon("star"), post_rating_path(@post, current_user_rate, rating: {star_count: 1}), method: :patch %>
-  <%= link_to fa_icon("star"), post_rating_path(@post, current_user_rate, rating: {star_count: 2}), method: :patch %>
-  <%= link_to fa_icon("star"), post_rating_path(@post, current_user_rate, rating: {star_count: 3}), method: :patch %>
-  <%= link_to fa_icon("star"), post_rating_path(@post, current_user_rate, rating: {star_count: 4}), method: :patch %>
-  <%= link_to fa_icon("star"), post_rating_path(@post, current_user_rate), method: :delete %>
-  <%= link_to "Clear", post_rating_path(@post, current_user_rate), method: :delete %>
-<% else %>
-  <%= link_to fa_icon("star-o"), post_ratings_path(@post, rating: {star_count: 1}), method: :post %>
-  <%= link_to fa_icon("star-o"), post_ratings_path(@post, rating: {star_count: 2}), method: :post %>
-  <%= link_to fa_icon("star-o"), post_ratings_path(@post, rating: {star_count: 3}), method: :post %>
-  <%= link_to fa_icon("star-o"), post_ratings_path(@post, rating: {star_count: 4}), method: :post %>
-  <%= link_to fa_icon("star-o"), post_ratings_path(@post, rating: {star_count: 5}), method: :post %>
-<% end %>
-
-<p><%= @post.body %></p>
-
-<% if @post.favourited_by?(current_user) %>
-  <%= link_to fa_icon("heart"), post_favourite_path(@post, @post.favourite_for(current_user)), method: :delete, remote: true, class: "like-icon" %>
-<% else %>
-  <%= link_to fa_icon("heart-o"), post_favourites_path(@post), method: :post, remote: true, class: "like-icon" %>
-<% end %>
-
-<% if can? :manage, @post %>
-<%= link_to "Edit", edit_post_path(@post) %>
-<%= link_to "Delete", post_path(@post),
-                      method: :delete,
-                      data:   {confirm: "Are you sure you want to delete this post?"} %>
-<% end %>
-
-<h2>Create a Comment</h2>
-<div id="comment-form">
-  <%= render "comments/form" %>
-</div>
-
-<h2>Comments</h2>
-<div id="comments">
-  <% @post.new_first_comments.each do |comment| %>
-    <%= render "/comments/comment", comment: comment %>
+<div class="container">
+  <h1><%= @post.title.titleize %></h1>
+  <p>Created by: <%= @post.user.full_name if @post.user%></p>
+  <p>Tags: <%= @post.tags.map {|t| t.title.capitalize}.join(", ") %></p>
+  <% if @post.rated_1_by?(current_user) %>
+    <%= link_to fa_icon("star"), post_rating_path(@post, current_user_rate), method: :delete %>
+    <%= link_to fa_icon("star-o"), post_rating_path(@post, current_user_rate, rating: {star_count: 2}), method: :patch %>
+    <%= link_to fa_icon("star-o"), post_rating_path(@post, current_user_rate, rating: {star_count: 3}), method: :patch %>
+    <%= link_to fa_icon("star-o"), post_rating_path(@post, current_user_rate, rating: {star_count: 4}), method: :patch %>
+    <%= link_to fa_icon("star-o"), post_rating_path(@post, current_user_rate, rating: {star_count: 5}), method: :patch %>
+    <%= link_to "Clear", post_rating_path(@post, current_user_rate), method: :delete %>
+  <% elsif @post.rated_2_by?(current_user) %>
+    <%= link_to fa_icon("star"), post_rating_path(@post, current_user_rate, rating: {star_count: 1}), method: :patch %>
+    <%= link_to fa_icon("star"), post_rating_path(@post, current_user_rate), method: :delete %>
+    <%= link_to fa_icon("star-o"), post_rating_path(@post, current_user_rate, rating: {star_count: 3}), method: :patch %>
+    <%= link_to fa_icon("star-o"), post_rating_path(@post, current_user_rate, rating: {star_count: 4}), method: :patch %>
+    <%= link_to fa_icon("star-o"), post_rating_path(@post, current_user_rate, rating: {star_count: 5}), method: :patch %>
+    <%= link_to "Clear", post_rating_path(@post, current_user_rate), method: :delete %>
+  <% elsif @post.rated_3_by?(current_user) %>
+    <%= link_to fa_icon("star"), post_rating_path(@post, current_user_rate, rating: {star_count: 1}), method: :patch %>
+    <%= link_to fa_icon("star"), post_rating_path(@post, current_user_rate, rating: {star_count: 2}), method: :patch %>
+    <%= link_to fa_icon("star"), post_rating_path(@post, current_user_rate), method: :delete %>
+    <%= link_to fa_icon("star-o"), post_rating_path(@post, current_user_rate, rating: {star_count: 4}), method: :patch %>
+    <%= link_to fa_icon("star-o"), post_rating_path(@post, current_user_rate, rating: {star_count: 5}), method: :patch %>
+    <%= link_to "Clear", post_rating_path(@post, current_user_rate), method: :delete %>
+  <% elsif @post.rated_4_by?(current_user) %>
+    <%= link_to fa_icon("star"), post_rating_path(@post, current_user_rate, rating: {star_count: 1}), method: :patch %>
+    <%= link_to fa_icon("star"), post_rating_path(@post, current_user_rate, rating: {star_count: 2}), method: :patch %>
+    <%= link_to fa_icon("star"), post_rating_path(@post, current_user_rate, rating: {star_count: 3}), method: :patch %>
+    <%= link_to fa_icon("star"), post_rating_path(@post, current_user_rate), method: :delete %>
+    <%= link_to fa_icon("star-o"), post_rating_path(@post, current_user_rate, rating: {star_count: 5}), method: :patch %>
+    <%= link_to "Clear", post_rating_path(@post, current_user_rate), method: :delete %>
+  <% elsif @post.rated_5_by?(current_user) %>
+    <%= link_to fa_icon("star"), post_rating_path(@post, current_user_rate, rating: {star_count: 1}), method: :patch %>
+    <%= link_to fa_icon("star"), post_rating_path(@post, current_user_rate, rating: {star_count: 2}), method: :patch %>
+    <%= link_to fa_icon("star"), post_rating_path(@post, current_user_rate, rating: {star_count: 3}), method: :patch %>
+    <%= link_to fa_icon("star"), post_rating_path(@post, current_user_rate, rating: {star_count: 4}), method: :patch %>
+    <%= link_to fa_icon("star"), post_rating_path(@post, current_user_rate), method: :delete %>
+    <%= link_to "Clear", post_rating_path(@post, current_user_rate), method: :delete %>
+  <% else %>
+    <%= link_to fa_icon("star-o"), post_ratings_path(@post, rating: {star_count: 1}), method: :post %>
+    <%= link_to fa_icon("star-o"), post_ratings_path(@post, rating: {star_count: 2}), method: :post %>
+    <%= link_to fa_icon("star-o"), post_ratings_path(@post, rating: {star_count: 3}), method: :post %>
+    <%= link_to fa_icon("star-o"), post_ratings_path(@post, rating: {star_count: 4}), method: :post %>
+    <%= link_to fa_icon("star-o"), post_ratings_path(@post, rating: {star_count: 5}), method: :post %>
   <% end %>
+
+  <p><%= @post.body %></p>
+
+  <% if @post.favourited_by?(current_user) %>
+    <%= link_to fa_icon("heart"), post_favourite_path(@post, @post.favourite_for(current_user)), method: :delete, remote: true, class: "like-icon" %>
+  <% else %>
+    <%= link_to fa_icon("heart-o"), post_favourites_path(@post), method: :post, remote: true, class: "like-icon" %>
+  <% end %>
+
+  <% if can? :manage, @post %>
+  <%= link_to "Edit", edit_post_path(@post) %>
+  <%= link_to "Delete", post_path(@post),
+                        method: :delete,
+                        data:   {confirm: "Are you sure you want to delete this post?"} %>
+  <% end %>
+
+  <h2>Create a Comment</h2>
+  <div id="comment-form">
+    <%= render "comments/form" %>
+  </div>
+
+  <% if @post.comments.exists? %>
+    <h2>Comments</h2>
+  <% end %>
+  <div id="comments">
+    <% @post.new_first_comments.each do |comment| %>
+      <%= render "/comments/comment", comment: comment %>
+    <% end %>
+  </div>
 </div>

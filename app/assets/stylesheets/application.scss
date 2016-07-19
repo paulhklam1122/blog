@@ -81,12 +81,15 @@ a:hover {
   background-color: #4d5053;
   color: white;
 }
-.navbar.navbar-dark.bg-primary.navbar-fixed-top {
-  padding-right: 30px;
-}
 
 .btn.btn-social.btn-twitter {
   margin-top: 8px;
+}
+
+#nav-title {
+  font-family: 'Yellowtail', cursive;
+  border: 2px #5b4141 solid;
+  border-radius: 40px;
 }
 
 footer {
@@ -95,7 +98,7 @@ footer {
   width: 100%;
   background: #D3D1D1;
   overflow: hidden;
-  position: absolute;
+  position: relative;
   bottom: 0px;
   margin-bottom: 0px;
 }
