@@ -7,38 +7,47 @@
   <%= csrf_meta_tags %>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
   <link href='https://fonts.googleapis.com/css?family=Yellowtail' rel='stylesheet' type='text/css'>
+  <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
 </head>
-<body>
-  <nav class="navbar navbar-dark bg-primary navbar-fixed-top" style="font-size: 20px">
-    <ul class="nav navbar-nav">
-      <li><%= link_to "Home", root_path %></li>
-      <li><%= link_to "About", about_path %></li>
-      <li><%= link_to "New Post", new_post_path %></li>
-      <li><%= link_to "All Posts", posts_path %></li>
-    </ul>
-    <ul class="nav navbar-nav navbar-right">
-      <% if user_signed_in? %>
-        <li><%= link_to "All Favourites", favourites_path %></li>
-        <li><%= link_to "Signed in as: #{current_user.full_name}", edit_user_path(session[:user_id])%></li>
-        <li><%= link_to "Sign Out", sessions_path, method: :delete %></li>
-      <% else %>
-        <li><%= link_to "Sign Up", new_user_path %></li>
-        <li><%= link_to "Sign In", new_sessions_path %></li>
-        <%= link_to sign_in_with_twitter_path do %>
-          <button class="btn btn-social btn-twitter"><span class="fa fa-twitter"></span>Sign in with Twitter</button>
-        <% end %>
+  <body>
+    <%= render "layouts/navbar" %>
+    <div class="content">
+      <% if flash[:notice] %>
+        <div class="flash-notice"><%= flash[:notice] %></div>
+      <% elsif flash[:alert] %>
+        <div class="flash-alert"><%= flash[:alert] %></div>
       <% end %>
-    </ul>
-  </nav>
-  <div class="jumbotron" style="background:#f28175">
-    <% if flash[:notice] %>
-      <div class="flash-notice"><%= flash[:notice] %></div>
-    <% elsif flash[:alert] %>
-      <div class="flash-alert"><%= flash[:alert] %></div>
-    <% end %>
-    <div class="container text-center">
         <%= yield %>
     </div>
-  </div>
-</body>
+    
+    <footer>
+      <div class="row">
+        <div class="col-md-4">
+          <ul><%= link_to "About Me", about_path %></ul>
+          <ul><%= link_to "Sign In", new_sessions_path %></ul>
+        </div>
+        <div class="col-md-4">
+          <ul class="list-inline social-buttons">
+            <li><a href="https://twitter.com/paulhklam" target="_blank"><i class="fa fa-twitter fa-lg"></i></a>
+            </li>
+            <li><a href="https://www.facebook.com/profile.php?id=1638930019" target="_blank"><i class="fa fa-facebook fa-lg"></i></a>
+            </li>
+            <li><a href="Public Profilehttps://ca.linkedin.com/in/paulhklam" target="_blank"><i class="fa fa-linkedin fa-lg"></i></a>
+            </li>
+          </ul>
+        </div>
+        <div class="col-md-4">
+          <ul class="list-inline quicklinks">
+            <li><a href="https://codecore.ca/program_applications/new" target="_blank">Contact CodeCore</a>
+            </li>
+            <li><a href="https://codecore.ca/policies" target="_blank">Privacy Policy</a>
+            </li>
+          </ul>
+        </div>
+        <div class="col-md-12">
+          <span class="copyright">Copyright &copy; Paul Lam <br />Cohort 13 CodeCore 2016</span>
+        </div>
+      </div>
+    </footer>
+  </body>
 </html>

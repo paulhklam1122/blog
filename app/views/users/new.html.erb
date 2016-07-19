@@ -1,17 +1,19 @@
-<h1>Create an Account</h1>
-<%= @user.errors.full_messages.join(", ") %>
-<%= bootstrap_form_for @user do |f| %>
-  <div class="content text-left" >
+<div class="container">
+  <h1>Create an Account</h1>
+  <%= @user.errors.full_messages.join(", ") %>
+  <%= bootstrap_form_for @user do |f| %>
+    <div class="content text-left" >
 
-    <%= f.text_field :first_name %>
+      <%= f.text_field :first_name %>
 
-    <%= f.text_field :last_name %>
+      <%= f.text_field :last_name %>
 
-    <%= f.email_field :email %>
+      <%= f.email_field :email %>
 
-    <%= f.password_field :password %>
+      <%= f.password_field :password %>
 
-    <%= f.password_field :password_confirmation %>
-  </div>
-  <%= f.submit "Create User", class: "btn btn-large btn-primary" %>
-<% end %>
+      <%= f.password_field :password_confirmation %>
+    </div>
+    <%= f.submit "Create User", class: "btn btn-large btn-primary" %>
+  <% end %>
+</div>

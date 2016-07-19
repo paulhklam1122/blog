@@ -41,6 +41,9 @@ gem 'simple_form'
 gem 'active_model_serializers'
 gem 'omniauth-twitter'
 gem 'twitter'
+gem 'quiet_assets'
+gem 'rails_12factor', group: :production
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

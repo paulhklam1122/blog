@@ -19,40 +19,32 @@
  // @import "bootstrap-sprockets";
  @import "bootstrap";
 
+ html, body {
+   height: 100%;
+ }
 
 
 li {
   list-style-type: none
 }
 
-// nav {
-//   background-color: #b95524;
-//   font-size: 25px;
-//   height: 50px;
-//   padding: 20px;
-//   color: white;
-//   text-align: center
-// }
-//
-
-//
 a:hover {
   color:#0e00ad;
   text-decoration: underline;
 }
 
-a {
-  text-decoration: none;
+.container {
   text-align: center;
-  color: #3561d2;
+  min-height: 100%;
+}
+
+.content {
+ min-height: 100%;
+ padding-top: 50px;
 }
 
 .field_with_errors input {
   border-color: red
-}
-
-body {
-  background-color: #f28175;
 }
 
 .jumbotron {
@@ -60,16 +52,6 @@ body {
   margin: auto;
 }
 
-
-// .page_counter {
-//   text-align: left;
-//   margin: 30px 20px 0px 0px;
-// }
-//
-// .posts_list {
-//   margin-top: 30px;
-// }
-//
 .flash-notice {
   width: 100%;
   height: 40px;
@@ -91,18 +73,39 @@ body {
   margin: 5px;
 }
 
-.navbar.navbar-dark.bg-primary.navbar-fixed-top li a{
-  color: white;
+.navbar.navbar-default.navbar-fixed-top li a{
   margin: auto;
 }
 
-.navbar.navbar-dark.bg-primary.navbar-fixed-top li a:hover {
-  background-color: #0038ff;
+.navbar.navbar-default.navbar-fixed-top li a:hover {
+  background-color: #4d5053;
+  color: white;
 }
 .navbar.navbar-dark.bg-primary.navbar-fixed-top {
   padding-right: 30px;
 }
 
 .btn.btn-social.btn-twitter {
-  margin-top: 7px;
+  margin-top: 8px;
+}
+
+footer {
+  padding: 25px 0;
+  text-align: center;
+  width: 100%;
+  background: #D3D1D1;
+  overflow: hidden;
+  position: absolute;
+  bottom: 0px;
+  margin-bottom: 0px;
+}
+
+footer a {
+ font-size: 15px;
+ color: #555;
+}
+
+footer a:hover {
+ color: #fff;
+ text-decoration: none;
 }
