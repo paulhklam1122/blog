@@ -21,6 +21,8 @@
 
  html, body {
    height: 100%;
+   background-image: url(image-path('paper.png'));
+   z-index: -2
  }
 
 
@@ -84,12 +86,6 @@ a:hover {
 
 .btn.btn-social.btn-twitter {
   margin-top: 8px;
-}
-
-#nav-title {
-  font-family: 'Yellowtail', cursive;
-  border: 2px #5b4141 solid;
-  border-radius: 40px;
 }
 
 footer {

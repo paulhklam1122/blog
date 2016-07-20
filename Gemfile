@@ -43,6 +43,7 @@ gem 'omniauth-twitter'
 gem 'twitter'
 gem 'quiet_assets'
 gem 'rails_12factor', group: :production
+gem 'bootstrap-kaminari-views'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

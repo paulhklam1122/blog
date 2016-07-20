@@ -59,6 +59,9 @@ GEM
     bootstrap-glyphicons (0.0.1)
       railties (>= 3.0)
       sass (>= 3.2)
+    bootstrap-kaminari-views (0.0.5)
+      kaminari (>= 0.13)
+      rails (>= 3.1)
     bootstrap-sass (3.3.6)
       autoprefixer-rails (>= 5.2.1)
       sass (>= 3.3.4)
@@ -294,6 +297,7 @@ DEPENDENCIES
   awesome_print
   bcrypt (~> 3.1.7)
   bootstrap-glyphicons
+  bootstrap-kaminari-views
   bootstrap-sass
   bootstrap-social-rails
   bootstrap_form

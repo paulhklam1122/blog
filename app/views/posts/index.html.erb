@@ -10,7 +10,7 @@
     <% if params[:search] %>
       <% @posts = Post.search(params[:search]).order("created_at DESC") %>
     <% else %>
-      <%= paginate @posts %>
+      <%= paginate @posts, :theme => "twitter-bootstrap-3" %>
     <% end %>
 
   </div>
